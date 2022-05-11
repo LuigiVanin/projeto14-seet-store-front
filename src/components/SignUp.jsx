@@ -1,22 +1,40 @@
 import Input from '../styles/Input.jsx';
 import Button from '../styles/Button.jsx';
+import Payment from './Payment.jsx';
 import logo from '../assets/logo.png';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function SignUp() {
+
+    const [confirm, setConfirm] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmedPassword, setConfirmedPassword] = useState('');
+
+    function openPayment(e) {
+        e.preventDefault();
+        setConfirm(true);
+    }
+
     return (
-        <Main>
-            <img src={logo} alt="cupcake" />
-            <h1>Sweet</h1>
-            <form>
-                <Input placeholder='Nome' />
-                <Input placeholder='E-mail' />
-                <Input placeholder='Senha' />
-                <Input placeholder='Confirme sua senha' />
-                <Button >Cadastrar</Button>
-            </form>
-            <p>Já tem cadastro? Faça seu login</p>
-        </Main>
+        <>
+            <Main>
+                <img src={logo} alt="cupcake" />
+                <h1>Sweet</h1>
+                <form onSubmit={openPayment}>
+                    <Input type='text' placeholder='Nome' value={name} onChange={(e) => setName(e.target.value)} required />
+                    <Input type='email' placeholder='E-mail' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <Input type='password' placeholder='Senha' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <Input type='password' placeholder='Confirme sua senha' value={confirmedPassword} onChange={(e) => setConfirmedPassword(e.target.value)} required />
+                    <Button type='submit'>Adicionar forma de pagamento</Button>
+                </form>
+                <Link to="/"><p>Já tem cadastro? Faça seu login</p></Link>
+            </Main>
+            <Payment confirm={confirm} setConfirm={setConfirm} name={name} email={email} password={password} confirmedPassword={confirmedPassword} />
+        </>
     )
 }
 
@@ -50,5 +68,6 @@ const Main = styled.main`
 
     p {
         font-size: 12px;
+        color: #212121
     }
 `

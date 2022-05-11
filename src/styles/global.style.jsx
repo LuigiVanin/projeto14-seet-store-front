@@ -12,6 +12,9 @@ const GlobalStyles = createGlobalStyle`
     .root{
         min-height: 100vh;
     }
+    a{
+        text-decoration: none;
+    }
 `;
 
 export default GlobalStyles;
