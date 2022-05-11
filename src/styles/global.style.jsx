@@ -7,8 +7,7 @@ const GlobalStyles = createGlobalStyle`
     body{
         min-height: 100vh;
         width: 100%;
-        background-color: #ffff4b;
-        font-family: 'Lexend Deca', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
     .root{
         min-height: 100vh;
