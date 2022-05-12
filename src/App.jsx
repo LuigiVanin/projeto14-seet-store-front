@@ -2,6 +2,7 @@ import Reset from "./styles/reset.style";
 import GlobalStyles from "./styles/global.style";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignUp from "./components/SignUp.jsx";
+import SignIn from "./components/pages/SignIn";
 
 const App = () => {
     return (
@@ -10,6 +11,7 @@ const App = () => {
                 <Reset />
                 <GlobalStyles />
                 <Routes>
+                    <Route path="/" element={<SignIn />} />
                     <Route path="/sign-up" element={<SignUp />} />
                     {/* <Route path="/" element={<SignIn />} />
                     <Route path="/home" element={<Home />} />
