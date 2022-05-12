@@ -60,6 +60,7 @@ const Main = styled.main`
         align-items: center;
         justify-content: space-between;
         height: 398px;
+        width: 92%;
     }
 
     button {
