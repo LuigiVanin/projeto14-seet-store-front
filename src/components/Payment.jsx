@@ -1,9 +1,9 @@
 import Input from "../styles/Input.jsx";
 import Button from "../styles/Button.jsx";
 import styled from 'styled-components';
-import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import api from "../api.js";
 
 export default function Payment(props) {
     const {confirm, setConfirm, name, email, password, confirmedPassword} = props
@@ -16,7 +16,7 @@ export default function Payment(props) {
     const navigate = useNavigate();
 
     function postData() {
-        const URL = 'http://localhost:5000/sign-up';
+        const URL = 'sign-up';
         const body = {
             name,
             email,
@@ -29,7 +29,7 @@ export default function Payment(props) {
             cardType
         }
     
-        const promise = axios.post(URL, body)
+        const promise = api.post(URL, body)
         promise.then(navigate("/home"));
         promise.catch(() => "Não foi possível realizar o cadastro");
     }
@@ -84,7 +84,7 @@ const Main = styled.main`
 
     form {
         background-color: F5F5F5;
-        width: 343px;
+        width: 92%;
         height: 384px;
         display: flex;
         flex-direction: column;
@@ -97,7 +97,7 @@ const Main = styled.main`
         justify-content: space-between;
 
         input {
-            width: 160px
+            width: 47%
         }
     }
 
