@@ -1,10 +1,11 @@
+import { Link, useNavigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 import { useState } from "react";
 import api from "../../api";
 import {
     ContainerSignIn as Container,
     Form,
 } from "../../styles/pages/signIn.style";
-import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
     const [signIn, setSignIn] = useState({ email: "", password: "" });
@@ -28,8 +29,9 @@ const SignIn = () => {
             }
         });
         promise.catch((err) => {
-            console.log(err.response);
+            console.log(err);
             alert("Dados incorretos!");
+            setRequest(false);
         });
     };
 
@@ -58,7 +60,13 @@ const SignIn = () => {
                     onChange={changeHandle}
                     required
                 />
-                <button>Sign In</button>
+                <button>
+                    {!request ? (
+                        "Entrar"
+                    ) : (
+                        <ThreeDots color="#fde545" width="85px" />
+                    )}
+                </button>
             </Form>
             <Link to="/sign-up">Não tem conta? faça cadastro!</Link>
         </Container>

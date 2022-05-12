@@ -79,6 +79,9 @@ const Form = styled.form`
         color: #2b2b2b;
         border-radius: 8px;
         box-shadow: 0px 0px 10px 0px #00000029;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 `;
 
