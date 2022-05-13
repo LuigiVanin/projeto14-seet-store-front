@@ -11,7 +11,7 @@ import { AuthContext } from "../../context/authContext";
 const SignIn = () => {
     const [signIn, setSignIn] = useState({ email: "", password: "" });
     const [request, setRequest] = useState(false);
-    const { setUser, setToken, token } = useContext(AuthContext);
+    const { setUser, setToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const changeHandle = (event) => {
