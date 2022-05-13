@@ -1,15 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import api from "../../api";
 import {
     ContainerSignIn as Container,
     Form,
 } from "../../styles/pages/signIn.style";
+import { AuthContext } from "../../context/authContext";
 
 const SignIn = () => {
     const [signIn, setSignIn] = useState({ email: "", password: "" });
     const [request, setRequest] = useState(false);
+    const { setUser, setToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const changeHandle = (event) => {
@@ -25,6 +27,11 @@ const SignIn = () => {
             console.log(response);
             if (response.data.token) {
                 localStorage.setItem("token", response.data.token);
+                setUser({
+                    name: response.date.name,
+                    email: response.data.email,
+                });
+                setToken(response.data.token);
                 navigate("/home");
             }
         });
