@@ -11,7 +11,7 @@ import { AuthContext } from "../../context/authContext";
 const SignIn = () => {
     const [signIn, setSignIn] = useState({ email: "", password: "" });
     const [request, setRequest] = useState(false);
-    const { setUser, setToken } = useContext(AuthContext);
+    const { setUser, setToken, token } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const changeHandle = (event) => {
@@ -28,7 +28,7 @@ const SignIn = () => {
             if (response.data.token) {
                 localStorage.setItem("token", response.data.token);
                 setUser({
-                    name: response.date.name,
+                    name: response.data.name,
                     email: response.data.email,
                 });
                 setToken(response.data.token);
