@@ -7,30 +7,26 @@ const AuthProvider = ({ children }) => {
     const [token, setToken] = useState("");
     const [user, setUser] = useState({});
 
-    const getUserData = () => {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-        const promise = api.get("user/", config);
-        promise.then((response) => {
-            console.log(response);
-            setUser({ ...response.data });
-        });
-        promise.catch((err) => console.log(err));
-    };
-
     useEffect(() => {
         const localToken = localStorage.getItem("token");
         if (localToken) {
             localStorage.setItem("token", localToken);
-            getUserData();
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${localToken}`,
+                },
+            };
+            const promise = api.get("user/", config);
+            promise.then((response) => {
+                console.log(response);
+                setUser({ ...response.data });
+            });
+            promise.catch((err) => console.log(err));
         }
-    });
+    }, []);
 
     return (
-        <AuthContext.Provider value={{ token, setToken, user, getUserData }}>
+        <AuthContext.Provider value={{ token, setToken, user, setUser }}>
             {children}
         </AuthContext.Provider>
     );
