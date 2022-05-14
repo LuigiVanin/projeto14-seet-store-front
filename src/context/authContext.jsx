@@ -4,8 +4,10 @@ import api from "../api";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const [token, setToken] = useState("");
+    const [token, setToken] = useState(localStorage.getItem("token"));
     const [user, setUser] = useState({});
+
+    // setToken(localStorage.getItem("token"));
 
     useEffect(() => {
         const localToken = localStorage.getItem("token");
@@ -21,7 +23,13 @@ const AuthProvider = ({ children }) => {
                 console.log(response);
                 setUser({ ...response.data });
             });
-            promise.catch((err) => console.log(err));
+            promise.catch((err) => {
+                if (err.response.status === 401) {
+                    console.log("Oh, my token");
+                    localStorage.removeItem("token");
+                    setToken("");
+                }
+            });
         }
     }, []);
 
