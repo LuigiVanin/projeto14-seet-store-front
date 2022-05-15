@@ -16,13 +16,13 @@ const Header = styled.header`
     left: 0;
     right: 0;
     height: 50px;
-    background: #fffffff4;
+    background: #fffffff0;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-inline: 10px;
     z-index: 10;
-    box-shadow: 0px 0px 10px 0px #00000029;
+    /* box-shadow: 0px 0px 10px 0px #00000029; */
     .bar {
         height: 50px;
         width: 100%;
@@ -82,4 +82,13 @@ const Footer = styled.footer`
     }
 `;
 
-export { Container, Header, Footer };
+const Title = styled.h1`
+    font-family: ${(props) =>
+        props.decorative
+            ? "'Dancing Script', cursive"
+            : "'Poppins', sans-serif"};
+    font-size: ${(props) => (props.decorative ? "38px" : "26px")};
+    padding-block: 15px;
+`;
+
+export { Container, Header, Footer, Title };
