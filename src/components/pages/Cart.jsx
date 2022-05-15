@@ -1,51 +1,55 @@
 import styled from 'styled-components';
 import Button from '../../styles/Button';
+import BottomBar from '../BottomBar';
 
 export default function Cart() {
     return (
-        <Main>
-            <h1>Carrinho</h1>
-            <div className='products'>
-                <article>
-                    <img src='#' alt='' />
-                    <div className='info'>
-                        <p className='price'>preço</p>
-                        <p className='description'>descrição</p>
-                        <div className='buttons'>
-                            <button>+</button>
-                            <p>0</p>
-                            <button>-</button>
+        <>
+            <Main>
+                <h1>Carrinho</h1>
+                <div className='products'>
+                    <article>
+                        <img src='#' alt='' />
+                        <div className='info'>
+                            <p className='price'>preço</p>
+                            <p className='description'>descrição</p>
+                            <div className='buttons'>
+                                <button>+</button>
+                                <p>0</p>
+                                <button>-</button>
+                            </div>
                         </div>
-                    </div>
-                </article>
-                <article>
-                    <img src='#' alt='' />
-                    <div className='info'>
-                        <p className='price'>preço</p>
-                        <p className='description'>descrição</p>
-                        <div className='buttons'>
-                            <button>+</button>
-                            <p>0</p>
-                            <button>-</button>
+                    </article>
+                    <article>
+                        <img src='#' alt='' />
+                        <div className='info'>
+                            <p className='price'>preço</p>
+                            <p className='description'>descrição</p>
+                            <div className='buttons'>
+                                <button>+</button>
+                                <p>0</p>
+                                <button>-</button>
+                            </div>
                         </div>
-                    </div>
-                </article>
-                <article>
-                    <img src='#' alt='' />
-                    <div className='info'>
-                        <p className='price'>preço</p>
-                        <p className='description'>descrição</p>
-                        <div className='buttons'>
-                            <button>+</button>
-                            <p>0</p>
-                            <button>-</button>
+                    </article>
+                    <article>
+                        <img src='#' alt='' />
+                        <div className='info'>
+                            <p className='price'>preço</p>
+                            <p className='description'>descrição</p>
+                            <div className='buttons'>
+                                <button>+</button>
+                                <p>0</p>
+                                <button>-</button>
+                            </div>
                         </div>
-                    </div>
-                </article>
-            </div>
-            <h2>total: </h2>
-            <Button className='end-shopping'>Finalizar compra</Button>
-        </Main>
+                    </article>
+                </div>
+                <h2>total: </h2>
+                <Button className='end-shopping'>Finalizar compra</Button>
+            </Main>
+            <BottomBar />
+        </>
     )
 }
 
@@ -137,7 +141,7 @@ const Main = styled.main`
         line-height: 32px;
         color: #212121;
         position: fixed;
-        bottom: 64px;
+        bottom: 84px;
         background-color: #FFFFFF;
         width: 100vw;
         height: 15vh;
@@ -146,7 +150,7 @@ const Main = styled.main`
 
     .end-shopping {
         position: fixed;
-        bottom: 40px;
+        bottom: 80px;
         right: 0;
         left: 0;
         z-index: 1;

@@ -26,7 +26,7 @@ const Home = () => {
         });
         // This must go the potected Route component
         promise.catch((err) => {
-            console.log("tokne is to old");
+            console.log("token is to old");
             localStorage.removeItem("token");
             navigate("/");
         });

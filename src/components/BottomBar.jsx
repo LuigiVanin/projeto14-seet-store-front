@@ -15,12 +15,12 @@ const BottomBar = () => {
     return (
         <Footer>
             <div className="bar">
-                <Link to="/bag">
+                <Link to="/cart">
                     <BagHandleOutline
                         color={"#00000"}
                         height={size}
                         width={size}
-                        cssClasses={selected["bag"] ? "selected" : ""}
+                        cssClasses={selected["cart"] ? "selected" : ""}
                     />
                 </Link>
                 <Link to="/home">
