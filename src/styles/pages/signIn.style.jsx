@@ -47,7 +47,7 @@ const Form = styled.form`
     transition: all 1.5s ease-in-out;
     animation: 1s ${fadeIn} ease-in-out;
     input {
-        height: 50px;
+        height: 64px;
         width: 100%;
         border: none;
         background-color: #74737324;
