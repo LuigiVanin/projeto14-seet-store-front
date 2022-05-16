@@ -51,7 +51,7 @@ const Main = styled.main`
     h1 {
         font-family: 'Dancing Script', cursive;
         font-size: 35px;
-        margin: 10px 0 20px 0;
+        margin: 10px 0 30px 0;
     }
 
     form {
@@ -59,16 +59,18 @@ const Main = styled.main`
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        height: 398px;
-        width: 92%;
+        height: 50vh;
+        width: 80%;
     }
 
     button {
-        margin: 30px 0 10px 0;
+        margin: 10px 0 10px 0;
     }
 
     p {
-        font-size: 12px;
-        color: #212121
+        margin-top: 10px;
+        font-size: 15px;
+        color: #212121;
+        text-decoration: underline;
     }
 `

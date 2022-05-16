@@ -1,64 +1,122 @@
 import styled from 'styled-components';
 import Button from '../../styles/Button';
 import BottomBar from '../BottomBar';
+import { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
+import api from '../../api';
+import Header from '../Header';
+import EmptyCart from "../../assets/cart-empty.png";
+import ConfirmationPage from '../ConfirmationPage';
 
 export default function Cart() {
-    return (
+
+    const [confirmation, setConfirmation] = useState(false)
+    const [products, setProducts] = useState([])
+    const { token, user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    let total = 0;
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    useEffect(() => {
+    
+        const promise = api.get("cart/", config);
+    
+        promise.then((response) => setProducts(response.data));
+
+        promise.catch((err) => {
+            console.log("token is to old");
+            localStorage.removeItem("token");
+            navigate("/");
+        });
+    }, []);
+
+    function endShopping() {
+        setConfirmation(true);
+    }
+
+    // function decrease() {
+    //     const promise = api.put("cart/", config);
+    //     promise.then()
+    // }
+
+    // function increase() {
+    //     const promise = api.put("cart/", config);
+    //     promise.then()
+    // }
+
+    // adicionar os onClick nos botões
+
+
+    return products.length === 0 ? (
         <>
+            <Header user={user}></Header>
+            <Main>
+                <h1>Carrinho</h1>
+                <img className='img-empty' src={EmptyCart} alt='imagem de carrinho vazio' />
+                <p className='empty'>Seu carrinho ainda está vazio!</p>
+            </Main>
+            <BottomBar />
+        </>
+    ) : (
+        <>
+            <Header user={user}></Header>
             <Main>
                 <h1>Carrinho</h1>
                 <div className='products'>
-                    <article>
-                        <img src='#' alt='' />
-                        <div className='info'>
-                            <p className='price'>preço</p>
-                            <p className='description'>descrição</p>
-                            <div className='buttons'>
-                                <button>+</button>
-                                <p>0</p>
-                                <button>-</button>
+                    {products.map((product) => {
+                        const {image, name, price, description, amount} = product;
+                        total += parseInt(price)*parseInt(amount)
+                        return(
+                        <article key={name}>
+                            <img src={image} alt={name} />
+                            <div className='info'>
+                                <p className='price'>R$ {price}</p>
+                                <p className='description'>{description}</p>
+                                <div className='buttons'>
+                                    <button>-</button>
+                                    <p>{amount}</p>
+                                    <button>+</button>
+                                </div>
                             </div>
-                        </div>
-                    </article>
-                    <article>
-                        <img src='#' alt='' />
-                        <div className='info'>
-                            <p className='price'>preço</p>
-                            <p className='description'>descrição</p>
-                            <div className='buttons'>
-                                <button>+</button>
-                                <p>0</p>
-                                <button>-</button>
-                            </div>
-                        </div>
-                    </article>
-                    <article>
-                        <img src='#' alt='' />
-                        <div className='info'>
-                            <p className='price'>preço</p>
-                            <p className='description'>descrição</p>
-                            <div className='buttons'>
-                                <button>+</button>
-                                <p>0</p>
-                                <button>-</button>
-                            </div>
-                        </div>
-                    </article>
+                        </article>)
+                    })}
                 </div>
-                <h2>total: </h2>
-                <Button className='end-shopping'>Finalizar compra</Button>
+                <h2>total: R$ {total.toFixed(2)}</h2>
+                <Button onClick={endShopping} className='end-shopping'>Finalizar compra</Button>
             </Main>
             <BottomBar />
+            <ConfirmationPage confirmation={confirmation} setConfirmation={setConfirmation} />
         </>
     )
 }
 
 const Main = styled.main`
 
-    padding-left: 15px;
+    padding: 0 15px;
     height: 100vh;
     position: relative;
     overflow-x: hidden;
+
+    .img-empty {
+        position: absolute;
+        top: 150px;
+        right: 140px;
+        width: 100px;
+    }
+
+    .empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 80vh;
+    }
 
     h1 {
         font-weight: 600;
@@ -67,7 +125,7 @@ const Main = styled.main`
         color: #212121;
         position: fixed;
         top: 0;
-        padding-top: 30px;
+        padding-top: 60px;
         background-color: #FFFFFF;
         width: 100vw;
         height: 70px;
@@ -75,7 +133,7 @@ const Main = styled.main`
     }
 
     .products {
-        padding-top: 120px;
+        padding-top: 110px;
         width: 100vw;
         height: 60vh;
     }
@@ -105,7 +163,6 @@ const Main = styled.main`
             font-size: 16px;
             line-height: 24px;
             color: #212121;
-            margin-bottom: 5px;
         }
 
         .description {
@@ -113,11 +170,12 @@ const Main = styled.main`
             font-size: 12px;
             line-height: 16px;
             color: #9E9E9E;
+            word-wrap: break-word;
         }
 
         .buttons {
             width: 98px;
-            height: 36px;
+            height: 25px;
             background-color: #F5F5F5;
             border-radius: 8px;
             display: flex;
@@ -129,7 +187,7 @@ const Main = styled.main`
             button {
                 border: none;
                 width: 32px;
-                height: 36px;
+                height: 25px;
                 font-size: 20px;
             }
         }

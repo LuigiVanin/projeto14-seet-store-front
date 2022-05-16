@@ -82,14 +82,17 @@ const Main = styled.main`
         line-height: 20px;
     }
 
+    button {
+        font-weight: 600;
+    }
+
     form {
-        background-color: F5F5F5;
-        width: 92%;
-        height: 384px;
+        width: 85%;
+        height: 55%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        margin-bottom: 70px;
+        margin-bottom: 80px;
     }
 
     div {
@@ -100,5 +103,4 @@ const Main = styled.main`
             width: 47%
         }
     }
-
 `
