@@ -1,5 +1,6 @@
 import { ItemBox, ItemImg, Cover } from "../styles/pages/home.style";
 import { InformationCircleOutline } from "react-ionicons";
+import PopUp from "./PopUp";
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import api from "../api";
@@ -7,6 +8,9 @@ import api from "../api";
 const Item = ({ item }) => {
     const [popUp, setPopUp] = useState(false);
     const { token, user } = useContext(AuthContext);
+    const toggleBox = () => {
+        setPopUp(!popUp);
+    };
 
     const config = {
         headers: {
@@ -26,7 +30,7 @@ const Item = ({ item }) => {
         promise.catch(() => alert("Erro ao adicionar produto no carrinho"));
 
     }
-
+  
     return (
         <>
             <ItemBox>
@@ -35,7 +39,7 @@ const Item = ({ item }) => {
                     height="23px"
                     width="23px"
                     cssClasses="info"
-                    onClick={() => setPopUp(!popUp)}
+                    onClick={toggleBox}
                 />
                 <ItemImg img={item.image} />
                 <div className="info-box">
@@ -46,11 +50,15 @@ const Item = ({ item }) => {
                     </div>
                 </div>
             </ItemBox>
-            {popUp ? <Cover onClick={() => setPopUp(false)} /> : <></>}
+            {popUp ? (
+                <Cover onClick={() => setPopUp(false)}>
+                    <PopUp item={item} set={toggleBox} />
+                </Cover>
+            ) : (
+                <></>
+            )}
         </>
     );
 };
-
-const PopUp = () => {};
 
 export default Item;

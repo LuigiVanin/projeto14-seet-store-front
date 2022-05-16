@@ -5,9 +5,10 @@ const HomeContainer = styled(Container)`
     padding-top: 50px;
     align-items: flex-start;
     flex-wrap: wrap;
+    height: auto;
 
     .item-box {
-        padding-bottom: 60px;
+        padding-bottom: 75px;
         margin-top: 20px;
         display: flex;
         flex-direction: column;
@@ -62,16 +63,16 @@ const ItemBox = styled.div`
             align-items: flex-end;
 
             button {
-                width: 90%;
+                width: 100%;
                 height: 45px;
                 border: none;
-                border-radius: 7px;
-                font-size: 16px;
-                font-weight: 500;
+                border-radius: 5px;
+                font-size: 15px;
+                font-weight: 400;
                 line-height: 16px;
-                background-color: #fddb74;
+                background-color: #fee440;
                 font-family: "Poppins", sans-serif;
-                box-shadow: 0px 0px 10px 0px #00000029;
+                box-shadow: 0px 0px 10px 0px #00000013;
             }
         }
     }
@@ -90,8 +91,11 @@ const ItemImg = styled.div`
 const Cover = styled.div`
     position: fixed;
     inset: 0;
-    background-color: #00000047;
-    z-index: 10;
+    background-color: #0000001d;
+    z-index: 11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export { HomeContainer, ItemBox, ItemImg, Cover };
