@@ -36,7 +36,7 @@ export default function ConfirmationPage(props) {
         e.preventDefault();
         const promise = api.post("success/", body, config);
         promise.then(() => {navigate("/success"); console.log("Dados de endereço enviados com sucesso")});
-        promise.catch(() => alert("Não foi possível enviar os dados!"))
+        promise.catch(() => alert("Não foi possível enviar os dados!"));
     }
 
     return confirmation === true ? (

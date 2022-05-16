@@ -23,7 +23,7 @@ export default function Success() {
 
         const promise = api.get("success/", config);
         promise.then((response) => {
-            console.log("Dados recebidos!");
+            
             setInfos(response.data);
         });
         promise.catch((err) => {
@@ -34,7 +34,7 @@ export default function Success() {
 
         const successPromise = api.get("payment/", config);
         successPromise.then((response) => {
-            console.log("Dados recebidos!");
+            
             setPayment(response.data);
         });
 
@@ -46,9 +46,10 @@ export default function Success() {
             payment,
             email: user.email
         }
+        
         const promise = api.post("conclude/", body, config);
         promise.then(() => {
-            navigate("/home");
+            navigate("/");
             alert("Compra concluída com sucesso!");
         });
         promise.catch(() => alert("Erro na conclusão da compra."));

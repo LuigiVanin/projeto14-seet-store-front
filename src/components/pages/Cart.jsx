@@ -11,8 +11,9 @@ import ConfirmationPage from '../ConfirmationPage';
 
 export default function Cart() {
 
-    const [confirmation, setConfirmation] = useState(false)
-    const [products, setProducts] = useState([])
+    const [confirmation, setConfirmation] = useState(false);
+    const [products, setProducts] = useState([]);
+    const [address, setAddress] = useState('');
     const { token, user } = useContext(AuthContext);
     const navigate = useNavigate();
     let total = 0;
@@ -40,18 +41,29 @@ export default function Cart() {
         setConfirmation(true);
     }
 
-    // function decrease() {
-    //     const promise = api.put("cart/", config);
-    //     promise.then()
-    // }
+    function decrease(product) {
+        const body = {
+            update: "decrease",
+            itemId: product.itemId
+        }
+        const promise = api.put("cart/", body, config);
+        promise.then(() => {
+            api.get("cart/", config).then((response) => setProducts(response.data));
+        });
+        promise.catch(() => console.log("Deu ruim..."));
+    }
 
-    // function increase() {
-    //     const promise = api.put("cart/", config);
-    //     promise.then()
-    // }
-
-    // adicionar os onClick nos botões
-
+    function increase(product) {
+        const body = {
+            update: "increase",
+            itemId: product.itemId
+        }
+        const promise = api.put("cart/", body, config);
+        promise.then(() => {
+            api.get("cart/", config).then((response) => setProducts(response.data));
+        });
+        promise.catch(() => console.log("Deu ruim..."));
+    }
 
     return products.length === 0 ? (
         <>
@@ -79,9 +91,9 @@ export default function Cart() {
                                 <p className='price'>R$ {price}</p>
                                 <p className='description'>{description}</p>
                                 <div className='buttons'>
-                                    <button>-</button>
+                                    <button onClick={() => decrease(product)}>-</button>
                                     <p>{amount}</p>
-                                    <button>+</button>
+                                    <button onClick={() => increase(product)}>+</button>
                                 </div>
                             </div>
                         </article>)
