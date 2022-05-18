@@ -32,7 +32,7 @@ export default function Payment(props) {
         };
 
         const promise = api.post(URL, body);
-        promise.then(navigate("/home"));
+        promise.then(navigate("/"));
         promise.catch(
             () => alert("Não foi possível realizar o cadastro"),
             setConfirm(false)
